@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ProfileSetup from "./pages/student/ProfileSetup";
-import Welcome from "./pages/Welcome";
 import StudentDashboard from "./pages/student/Dashboard";
 import LessonsList from "./pages/student/LessonsList";
 import AuthGuard from "./components/auth/AuthGuard";
@@ -11,6 +10,7 @@ import ErrorPage from "./components/student/error/ErrorPage";
 import ErrorBoundary from "./components/student/error/ErrorBoundary";
 import LessonContent from "./pages/student/LessonContent";
 import LessonQuiz from "./pages/student/LessonQuiz";
+import Home from "./pages/Home";
 
 export default function App() {
   return (
@@ -18,7 +18,7 @@ export default function App() {
       <div className="bg-gray-100 min-h-screen">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile-setup" element={<AuthGuard><ProfileSetup /></AuthGuard>} />
