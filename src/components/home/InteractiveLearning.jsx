@@ -20,7 +20,7 @@ export default function InteractiveLearning() {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="text-4xl font-bold text-primary mb-6"
                 >
                     Interactive Learning
@@ -30,7 +30,7 @@ export default function InteractiveLearning() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="text-lg text-gray-700 max-w-3xl mx-auto mb-16"
                 >
                     At SESKHEM, learning is never boring! Children interact, play, and grow smarter through engaging activities powered by AI.
@@ -43,7 +43,7 @@ export default function InteractiveLearning() {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             whileHover="hover"
-                            viewport={{ once: true }}
+                            viewport={{ once: false }}
                             className="relative rounded-2xl overflow-hidden h-64"
                         >
                             <motion.div

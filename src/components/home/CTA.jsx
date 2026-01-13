@@ -10,7 +10,7 @@ export default function CTA() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="py-24 px-6 rounded-t-3xl bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400 text-white text-center shadow-xl"
         >
             <motion.h2

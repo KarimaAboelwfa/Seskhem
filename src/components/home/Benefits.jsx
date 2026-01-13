@@ -19,7 +19,7 @@ export default function Benefits() {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="text-4xl font-bold text-primary mb-6"
                 >
                     Why Choose SESKHEM
@@ -29,7 +29,7 @@ export default function Benefits() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="text-lg text-gray-700 mb-12 max-w-3xl mx-auto"
                 >
                     SESKHEM combines learning, fun, and artificial intelligence to give children a unique, safe, and interactive educational experience.
@@ -42,7 +42,7 @@ export default function Benefits() {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.2 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: false }}
                             className={`flex items-center gap-4 p-5 rounded-2xl shadow-lg hover:shadow-xl transition ${benefit.bg}`}
                         >
                             <div className="flex-shrink-0">{benefit.icon}</div>

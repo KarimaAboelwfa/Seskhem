@@ -43,7 +43,7 @@ export default function HowItWorks() {
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="text-4xl font-bold text-primary mb-20 lg:mb-0"
                 >
                     How Does SESKHEM Use AI
@@ -59,7 +59,7 @@ export default function HowItWorks() {
                                 key={step.id}
                                 initial={{ opacity: 0, x: -40 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
+                                viewport={{ once: false }}
                                 className="text-left"
                             >
                                 <div className="flex items-center gap-4 mb-3">
@@ -82,7 +82,7 @@ export default function HowItWorks() {
                             initial={{ scale: 0.85, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
                             transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: false }}
                             className="relative z-10 bg-white shadow-xl rounded-3xl p-10 lg:mt-40"
                         >
                             <Lottie
@@ -108,7 +108,7 @@ export default function HowItWorks() {
                                 key={step.id}
                                 initial={{ opacity: 0, x: 40 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
+                                viewport={{ once: false }}
                             >
                                 <div className="flex items-center justify-end gap-4 mb-3">
                                     <img src={step.img} alt={step.title} className="w-20 h-20" />
