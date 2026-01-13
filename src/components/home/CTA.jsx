@@ -11,7 +11,7 @@ export default function CTA() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: false }}
-            className="py-24 px-6 rounded-t-3xl bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400 text-white text-center shadow-xl"
+            className="py-24 px-6 rounded-t-full bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400 text-white text-center shadow-xl"
         >
             <motion.h2
                 initial={{ y: 20, opacity: 0 }}

@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import heroBg from "../../assets/images/home.jpeg";
-import robot from "../../assets/images/robot.png";
+import robot from "../../assets/images/Robot_and_Boy.png";
 import { Typewriter } from 'react-simple-typewriter';
+import heroBg from "../../assets/images/heroBg.jpeg";
 
 export default function Hero() {
     const navigate = useNavigate();
@@ -12,8 +12,7 @@ export default function Hero() {
         <section
             className="relative min-h-screen flex flex-col justify-center bg-cover"
             style={{ backgroundImage: `url(${heroBg})` }}
-        >
-
+            >
             {/* Content */}
             <div className="flex justify-between items-center px-10 lg:px-24">
                 <motion.div
@@ -23,7 +22,7 @@ export default function Hero() {
                     transition={{ duration: 0.8 }}>
                     <img src={robot} alt="robot" className="relative z-10" />
                 </motion.div>
-                <div className="relative z-10">
+                <div className="relative bg-white/70 p-10 rounded-3xl z-10">
                     {/* Site Name */}
                     <motion.h1
                         initial={{ y: -60, opacity: 0 }}

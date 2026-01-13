@@ -14,14 +14,14 @@ const activities = [
 
 export default function InteractiveLearning() {
     return (
-        <section className="py-24 bg-white px-6">
-            <div className="max-w-6xl mx-auto text-center">
+        <section className="py-24 px-6">
+            <div className="max-w-6xl mx-auto text-center bg-white/70 rounded-3xl p-10">
                 <motion.h2
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: false }}
-                    className="text-4xl font-bold text-primary mb-6"
+                    className="text-4xl md:text-5xl font-extrabold text-center drop-shadow-lg mb-6"
                 >
                     Interactive Learning
                 </motion.h2>

@@ -36,15 +36,15 @@ const steps = [
 
 export default function HowItWorks() {
     return (
-        <section className="py-28 px-6">
-            <div className="max-w-7xl mx-auto text-center">
+        <section className="py-24 px-6">
+            <div className="max-w-7xl mx-auto text-center bg-white/70 rounded-3xl p-10">
 
                 {/* Title */}
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
-                    className="text-4xl font-bold text-primary mb-20 lg:mb-0"
+                    className="text-4xl md:text-5xl font-extrabold text-center drop-shadow-lg mb-20 lg:mb-0 "
                 >
                     How Does SESKHEM Use AI
                 </motion.h2>
