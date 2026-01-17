@@ -15,22 +15,20 @@ import Home from "./pages/Home";
 export default function App() {
   return (
     <ErrorBoundary>
-      <div className="bg-gray-100 min-h-screen">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile-setup" element={<AuthGuard><ProfileSetup /></AuthGuard>} />
-            <Route path="/dashboard" element={<AuthGuard><StudentDashboard /></AuthGuard>} />
-            <Route path="/subjects/:subjectSlug" element={<AuthGuard><SubjectDetails /></AuthGuard>} />
-            <Route path="/lessons/:unitSlug" element={<AuthGuard><LessonsList /></AuthGuard>} />
-            <Route path="/lesson/:lessonSlug" element={<AuthGuard><LessonContent /></AuthGuard>} />
-            <Route path="/quiz/:lessonSlug" element={<AuthGuard><LessonQuiz /></AuthGuard>} />
-            <Route path="*" element={<ErrorPage message="Page not found" code={404} />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile-setup" element={<AuthGuard><ProfileSetup /></AuthGuard>} />
+          <Route path="/dashboard" element={<AuthGuard><StudentDashboard /></AuthGuard>} />
+          <Route path="/subjects/:subjectSlug" element={<AuthGuard><SubjectDetails /></AuthGuard>} />
+          <Route path="/lessons/:unitSlug" element={<AuthGuard><LessonsList /></AuthGuard>} />
+          <Route path="/lesson/:lessonSlug" element={<AuthGuard><LessonContent /></AuthGuard>} />
+          <Route path="/quiz/:lessonSlug" element={<AuthGuard><LessonQuiz /></AuthGuard>} />
+          <Route path="*" element={<ErrorPage message="Page not found" code={404} />} />
+        </Routes>
+      </BrowserRouter>
     </ErrorBoundary>
   );
 }
