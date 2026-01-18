@@ -4,7 +4,7 @@ import { getLessonContent } from "../../api/student";
 import toast from "react-hot-toast";
 import LessonContentSkeleton from "../../components/skeletons/LessonContentSkeleton";
 import UserLayout from "../../components/layouts/UserLayout";
-import { DocumentTextIcon, PaperAirplaneIcon, SpeakerWaveIcon, BoltIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
+import { DocumentTextIcon, PaperAirplaneIcon, SpeakerWaveIcon, BoltIcon, ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import LessonAIChat from "../../components/student/ai/LessonAIChat"
@@ -29,6 +29,8 @@ export default function LessonContent() {
 
     const [playing, setPlaying] = useState(false);
     const [audio, setAudio] = useState(null);
+
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const handleExplain = async (content) => {
         setExplainingId(content.order);
@@ -80,8 +82,9 @@ export default function LessonContent() {
         const fetchLesson = async () => {
             try {
                 const res = await getLessonContent(lessonSlug);
-                // console.log(res.data)
+                console.log(res.data)
                 setLesson(res.data);
+                setCurrentIndex(0);
             } catch (err) {
                 if (err.response?.status === 403) {
                     setLocked(true);
@@ -106,6 +109,12 @@ export default function LessonContent() {
         );
     }
 
+    const sortedContents = [...(lesson.contents || [])].sort(
+        (a, b) => a.order - b.order
+    );
+
+    const currentContent = sortedContents[currentIndex];
+
     return (
         <UserLayout>
             <div className="p-8 max-w-4xl mx-auto space-y-8">
@@ -116,35 +125,31 @@ export default function LessonContent() {
                     <p className="text-gray-500">No content available for this lesson.</p>
                 )}
 
-                {[...lesson.contents]
-                    .sort((a, b) => a.order - b.order)
-                    .map((content, index) => (
-                        <div
-                            key={index}
-                            className="bg-white p-6 rounded-2xl shadow space-y-4"
-                        >
+                {currentContent && (
+                    <>
+                        <div className="bg-white p-6 rounded-2xl shadow space-y-4">
                             <h3 className="font-semibold text-lg">
-                                {content.title}
+                                {currentContent.title}
                             </h3>
 
                             <motion.button
-                                onClick={() => handleExplain(content)}
-                                disabled={explaining && explainingId === content.order}
+                                onClick={() => handleExplain(currentContent)}
+                                disabled={explaining && explainingId === currentContent.order}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className={`flex items-center gap-1 text-sm text-white px-2 py-1 rounded-lg
-                                    ${explaining && explainingId === content.order ? "bg-gray-400 cursor-not-allowed" : "bg-indigo-500 hover:bg-indigo-600 cursor-pointer"}
+                                    ${explaining && explainingId === currentContent.order ? "bg-gray-400 cursor-not-allowed" : "bg-indigo-500 hover:bg-indigo-600 cursor-pointer"}
                                     `}
                             >
                                 <BoltIcon className="w-5 h-5" />
-                                {explaining && explainingId === content.order ? "Explaining..." : "Explain with AI"}
+                                {explaining && explainingId === currentContent.order ? "Explaining..." : "Explain with AI"}
                             </motion.button>
 
                             {/* VIDEO */}
-                            {content.content_type === "Video" && content.video_url && (
+                            {currentContent.content_type === "Video" && currentContent.video_url && (
                                 <iframe
-                                    src={content.video_url}
-                                    title={content.title}
+                                    src={currentContent.video_url}
+                                    title={currentContent.title}
                                     className="w-full h-64 rounded-xl"
                                     loading="lazy"
                                     allowFullScreen
@@ -152,9 +157,9 @@ export default function LessonContent() {
                             )}
 
                             {/* PDF */}
-                            {content.content_type === "PDF" && content.file && (
+                            {currentContent.content_type === "PDF" && currentContent.file && (
                                 <motion.a
-                                    href={content.file}
+                                    href={currentContent.file}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="bg-indigo-500 text-white font-semibold flex items-center w-max p-2 rounded"
@@ -167,16 +172,16 @@ export default function LessonContent() {
                             )}
 
                             {/* RICH TEXT */}
-                            {content.content_type === "RichText" &&
-                                content.rich_text_content && (
+                            {currentContent.content_type === "RichText" &&
+                                currentContent.rich_text_content && (
                                     <div className="relative w-full flex justify-center items-start mt-6">
 
                                         <div className="bg-gray-100 border border-gray-200 p-4 rounded-2xl max-w-md shadow-lg">
                                             <div className="flex items-start justify-between gap-2">
-                                                <p className="text-gray-800 whitespace-pre-line">{content.rich_text_content}</p>
+                                                <p className="text-gray-800 whitespace-pre-line">{currentContent.rich_text_content}</p>
 
                                                 <motion.button
-                                                    onClick={() => handlePlayAudio(content.rich_text_content)}
+                                                    onClick={() => handlePlayAudio(currentContent.rich_text_content)}
                                                     disabled={playing}
                                                     whileHover={{ scale: 1.05 }}
                                                     whileTap={{ scale: 0.95 }}
@@ -197,7 +202,7 @@ export default function LessonContent() {
                                     </div>
                                 )}
 
-                            {explainingId === content.order && explanation && (
+                            {explainingId === currentContent.order && explanation && (
                                 <div className="mt-4 bg-gray-100 border border-gray-200 p-4 rounded-xl text-gray-800 leading-relaxed">
                                     <h4 className="font-bold mb-2 text-indigo-600">
                                         AI Explanation
@@ -216,22 +221,52 @@ export default function LessonContent() {
                                     </motion.button>
                                 </div>
                             )}
-
                         </div>
-                    ))}
+                    </>
+                )}
 
-                <div className="flex justify-end ml-auto">
-                    <motion.button
-                        onClick={() => navigate(`/quiz/${lesson.slug}`)}
-                        className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 rounded-2xl font-bold shadow-lg transition cursor-pointer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                    >
-                        Start Quiz
-                        <ArrowRightIcon className="w-6 h-6 " />
-                    </motion.button>
-                </div>
+                {sortedContents.length > 0 && (
+                    <div className="flex justify-between items-center">
+                        {currentIndex !== 0 ? (
+                            <motion.button
+                                onClick={() => setCurrentIndex(i => i - 1)}
+                                className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 rounded-2xl font-bold shadow-lg transition cursor-pointer"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                <ArrowLeftIcon className="w-6 h-6 " />
+                                Previous
+                            </motion.button>
+                        ) : (
+                            <div />
+                        )}
+
+                        {currentIndex === sortedContents.length - 1 ? (
+                            <motion.button
+                                onClick={() => navigate(`/quiz/${lesson.slug}`)}
+                                className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 rounded-2xl font-bold shadow-lg transition cursor-pointer"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                Start Quiz
+                                <ArrowRightIcon className="w-6 h-6 " />
+                            </motion.button>
+                        ) : (
+                            <motion.button
+                                onClick={() => setCurrentIndex(i => i + 1)}
+                                className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 rounded-2xl font-bold shadow-lg transition cursor-pointer"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                Next
+                                <ArrowRightIcon className="w-6 h-6 " />
+                            </motion.button>
+                        )}
+                    </div>
+                )}
 
                 <motion.button
                     onClick={() => setShowChat(true)}
