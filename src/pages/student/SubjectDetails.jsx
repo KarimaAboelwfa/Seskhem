@@ -37,8 +37,8 @@ export default function SubjectDetails() {
 
         subject.units.forEach((unit) => {
             let unitStatus = "locked";
-            if (unit.progress === 100) unitStatus = "completed";
-            else if (unit.progress > 0) unitStatus = "partial";
+            if (unit.is_locked === false && unit.progress === 100) unitStatus = "completed";
+            else if (unit.is_locked === false && unit.progress !== 100) unitStatus = "partial";
 
             result.push({
                 type: "unit",
