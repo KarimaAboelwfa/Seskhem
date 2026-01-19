@@ -82,7 +82,7 @@ export default function LessonContent() {
         const fetchLesson = async () => {
             try {
                 const res = await getLessonContent(lessonSlug);
-                console.log(res.data)
+                // console.log(res.data)
                 setLesson(res.data);
                 setCurrentIndex(0);
             } catch (err) {
@@ -132,18 +132,20 @@ export default function LessonContent() {
                                 {currentContent.title}
                             </h3>
 
-                            <motion.button
-                                onClick={() => handleExplain(currentContent)}
-                                disabled={explaining && explainingId === currentContent.order}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className={`flex items-center gap-1 text-sm text-white px-2 py-1 rounded-lg
+                            {currentContent.content_type === "RichText" && (
+                                <motion.button
+                                    onClick={() => handleExplain(currentContent)}
+                                    disabled={explaining && explainingId === currentContent.order}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className={`flex items-center gap-1 text-sm text-white px-2 py-1 rounded-lg
                                     ${explaining && explainingId === currentContent.order ? "bg-gray-400 cursor-not-allowed" : "bg-indigo-500 hover:bg-indigo-600 cursor-pointer"}
                                     `}
-                            >
-                                <BoltIcon className="w-5 h-5" />
-                                {explaining && explainingId === currentContent.order ? "Explaining..." : "Explain with AI"}
-                            </motion.button>
+                                >
+                                    <BoltIcon className="w-5 h-5" />
+                                    {explaining && explainingId === currentContent.order ? "Explaining..." : "Explain with AI"}
+                                </motion.button>
+                            )}
 
                             {/* VIDEO */}
                             {currentContent.content_type === "Video" && currentContent.video_url && (
