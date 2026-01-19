@@ -161,9 +161,13 @@ export default function LoginForm() {
 
             <p className="mt-4 text-center text-gray-600">
                 Don't have an account?{" "}
-                <a href="/register" className="text-indigo-500 font-semibold hover:underline">
+                <span
+                    onClick={() => navigate("/register")}
+                    className="text-indigo-500 font-semibold hover:underline cursor-pointer"
+                >
                     SIGN UP
-                </a>
+                </span>
+
             </p>
         </motion.div>
     );

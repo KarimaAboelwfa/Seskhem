@@ -240,9 +240,12 @@ export default function RegisterForm() {
 
             <p className="mt-4 text-center text-gray-600">
                 Already have an account?{" "}
-                <a href="/login" className="text-indigo-500 font-semibold hover:underline">
+                <span
+                    onClick={() => navigate("/login")}
+                    className="text-indigo-500 font-semibold hover:underline cursor-pointer"
+                >
                     SIGN IN
-                </a>
+                </span>
             </p>
 
         </motion.div>
